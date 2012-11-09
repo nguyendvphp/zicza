@@ -234,6 +234,19 @@ a:hover{
     padding: 10px;
     line-height: 25px;
 }
+
 #content_comment{
     width:200px;
+}
+#maincontent .comment{
+    width:100%;
+}
+#maincontent .comment .avatar{
+    width:120px;
+    float:left;
+}
+
+#maincontent .comment .info_comment{
+    width:500px;
+    float:left;
 }

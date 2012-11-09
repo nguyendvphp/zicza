@@ -294,7 +294,9 @@ class WUserItemController extends WebController
         $page_wap =WFunction::web_pager($total,$pageInfo['cpage'],$num_per_page,Yii::app()->createUrl('wUserItem/listcomment',array('id'=>$idshop,'vote_type'=>$vote_type)),$imagePath);
         $arrListComment = WUserItem::getListComment($vote_type, $idshop, $pageInfo['start'], $num_per_page);
         
-        $this->render('listcomment', array('arrComment'=>$arrListComment, 'pageInfo'=>$pageInfo));
+        $arrShop = WUserItem::getDetailShop($idshop);
+        
+        $this->render('listcomment', array('arrComment'=>$arrListComment, 'pageInfo'=>$pageInfo, 'model'=> $arrShop));
     }
 	/**
 	 * Deletes a particular model.

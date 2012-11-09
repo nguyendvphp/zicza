@@ -1,7 +1,7 @@
 <?php
     return array(
         'hashkey'=>'centech',
-        'upload_path' => "http://localhost/zicza/src/uploads/",
+        'upload_path' => "http://localhost/zicza/zicza/uploads/",
         'ACTIVE' => "ACTIVE",
         'config_folder' => "config",
         'log_folder' => "log",
