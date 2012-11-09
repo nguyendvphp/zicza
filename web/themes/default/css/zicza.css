@@ -1,0 +1,239 @@
+body
+{
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #333333;
+    direction: ltr;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    line-height: 1.28;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    unicode-bidi: embed;
+}
+html,div, span, h1, h2, h3, h4, h5, h6, blockquote, pre, em, font, img, small, strong, sub, sup, ol, dl, dt, dd, fieldset, form, label, legend,  th,  select, center
+{
+    border: 0 none;
+    margin: 0 none;
+    outline: 0 none;
+    padding: 0;
+}
+a
+{
+	text-decoration:none;
+	color:#333;
+}
+a:visit
+{
+	color:#333;
+}
+ul{
+	list-style:none;
+    margin: 0 !important;
+    padding: 0;
+}
+li{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+    color: #000;
+}
+a:hover{
+	text-decoration:none;
+}
+.clear{
+    clear: both;
+}
+
+#wrapper{
+    margin: 20px auto;
+    width:980px;
+    border: 1px solid #ccc;
+    border-radius:7px;
+    box-shadow: 3px 3px 3px #ccc;
+}
+#header{
+    height: 120px;
+    width:100%;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 0 3px #ccc;
+}
+#headersub{
+    height: 70px;
+    width:100%;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 0 3px #ccc;
+}
+#logo{
+    float:left;
+    width:300px;
+    padding-top: 5px;
+}
+#login{
+    float:left;
+    width:200px;
+    padding-top: 10px;
+}
+#mainmenu{
+    float:left;
+    width:480px;
+}
+#mainmenu ul{
+    padding-top: 60px;
+}
+#mainmenu ul li{
+    float:left;
+    display: inline;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#mainmenu ul li a{
+    text-transform: uppercase;
+    font-size: 12pt;
+    color: #333;
+    font-family: "Myriad Pro";
+}
+#mainmenu ul li a:hover{
+    text-decoration: none;
+    color: #72b939;
+    font-weight: bold;
+}
+#primary{
+    width:100%;
+    min-height: 300px;
+}
+#sidebar{
+    float:left;
+    width:179px;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+    min-height: 300px;
+    padding-top: 10px;
+}
+#sidebar .info{
+    padding-left: 5px;
+}
+#maincontent{
+    float:left;
+    width:770px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+#maincontent h1{
+    font-size: 18px;
+    color: #599929;
+}
+.FrameListContents {
+    background-color: #FFF;
+    background-image: url("../images/menu-bg.png");
+    background-position: center top;
+    background-repeat: repeat-x;
+    text-align: left;
+}
+.Radius {
+    border-radius: 7px 7px 7px 7px;
+}
+.MenuCate {
+    display: inline-block;
+    height: 35px;
+    padding-left: 15px;
+    padding-top: 8px;
+    text-align: left;
+}
+.MenuCate a.Active {
+    background-image: url("../images/menu-active.gif");
+    background-position: center bottom;
+    background-repeat: repeat-x;
+    border-radius: 0 0 7px 7px;
+    color: #FFF;
+    font-weight: bold;
+    padding: 12px 20px;
+    text-transform: uppercase;
+}
+.NewsBG{
+    margin-top: 10px;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 5px;
+}
+.NewsBG:last-child{
+    border:none;
+}
+.ServiceDetail1 .ServiceImg {
+    display: inline-block;
+    margin-left: 15px;
+}
+.ServiceDetail1 .ServiceImg img {
+    height: 100px;
+    width: 139px;
+}
+.ServiceDetail1 .ServiceInfo {
+    display: inline-block;
+    line-height: 16px;
+    margin-left: 10px;
+    vertical-align: top;
+    width: 530px;
+}
+.ServiceDetail1 .ServiceInfo a {
+    color: #599929;
+}
+
+#footer{
+    height: 120px;
+    width:100%;
+    border-top: 1px solid #ccc;
+    
+}
+#footer .info{
+    padding: 20px;
+}
+
+/* css for company */
+#slogan{
+    float: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    width: 650px;
+}
+#company{
+    float:right;
+    width:300px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.namecompany{
+    font-size: 16px;
+    text-align: center;
+    padding-top: 30px;
+    padding-left: 30px;
+    display: block;
+    text-transform: uppercase;
+}
+.like{
+    color: green;
+}
+.dislike{
+    color: red;
+}
+#maincontent .khuyenmua{
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    width:300px;
+    margin-left: 220px;
+    padding: 10px;
+    line-height: 25px;
+}
+#maincontent .khongnenmua{
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    width:300px;
+    margin-left: 220px;
+    padding: 10px;
+    line-height: 25px;
+}
+#content_comment{
+    width:200px;
+}

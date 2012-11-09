@@ -1,0 +1,125 @@
+#page {
+	background: none repeat scroll 0 0 white;
+    border: none;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+.navbar {
+  margin-bottom: 0px;
+  overflow: visible;
+}
+#header {
+  border-top: none;
+  margin: 0;
+  padding: 0;
+  height:40px;
+}
+#pagelogin{
+    margin:0 auto;
+    padding-top: 50px;
+    width:300px;
+}
+.mymenu{
+	position: fixed;
+    border: none;
+    vertical-align: middle;
+    background: #2BA6CB;
+    text-align: center;
+    top:0;
+    left:0;
+    width:100%;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.098);
+    z-index:1000;
+}
+.navbar-inner {
+  background-color: #2C2C2C;
+  background-image: -moz-linear-gradient(center top , #333333, #222222);
+  background-repeat: repeat-x;
+  border-radius: 0px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+  min-height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#content {
+  padding: 5px;
+}
+.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+  width: 100%;
+}
+.navbar .nav > li {
+  display: block;
+  float: left;
+  text-align:left;
+}
+#content_toolbar li{
+    display: inline;
+    float:left;
+    list-style: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#function ul{
+    float: right;
+}
+#function ul li{
+    list-style: none;
+    float: left;
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button{
+    background-color: #ECECEC;
+    background-image: -moz-linear-gradient(#F4F4F4, #ECECEC);
+    border: 1px solid #D4D4D4;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font: 11px sans-serif;
+    margin: 0;
+    outline: medium none;
+    overflow: visible;
+    padding: 0.7em 3em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 white;
+    white-space: nowrap;
+    border-radius: 5px;
+}
+.button:hover{
+     background-color: #3C8DDE;
+    background-image: -moz-linear-gradient(#599BDC, #3072B3);
+    border-color: #3072B3 #3072B3 #2A65A0;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+}
+.notification {
+    background-position: 10px 11px !important;
+    background-repeat: no-repeat !important;
+    font-size: 13px;
+    margin: 0 0 15px;
+    padding: 0;
+    position: relative;
+    width: 99.8%;
+}
+.notesuccess {
+    background: url("../images/tick_circle.png") repeat scroll 0 0 #D5FFCE;
+    border: 1px solid #9ADF8F;
+    color: #556652;
+}
+.notification div {
+    display: block;
+    font-style: normal;
+    line-height: 1.5em;
+    padding: 10px 10px 10px 36px;
+}
+.notification .close {
+    color: #990000;
+    font-size: 9px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}

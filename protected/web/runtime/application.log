@@ -1,0 +1,15 @@
+2012/11/08 23:47:19 [warning] [application] Failed to set unsafe attribute "address" of "WUserItem".
+in D:\xampp\htdocs\zicza\src\protected\web\controllers\WUserItemController.php (146)
+in D:\xampp\htdocs\zicza\src\web\index.php (13)
+2012/11/08 23:47:19 [warning] [application] Failed to set unsafe attribute "phonenumber" of "WUserItem".
+in D:\xampp\htdocs\zicza\src\protected\web\controllers\WUserItemController.php (146)
+in D:\xampp\htdocs\zicza\src\web\index.php (13)
+2012/11/08 23:47:19 [warning] [application] Failed to set unsafe attribute "skype" of "WUserItem".
+in D:\xampp\htdocs\zicza\src\protected\web\controllers\WUserItemController.php (146)
+in D:\xampp\htdocs\zicza\src\web\index.php (13)
+2012/11/08 23:47:19 [warning] [application] Failed to set unsafe attribute "yahoo" of "WUserItem".
+in D:\xampp\htdocs\zicza\src\protected\web\controllers\WUserItemController.php (146)
+in D:\xampp\htdocs\zicza\src\web\index.php (13)
+2012/11/08 23:47:19 [warning] [application] Failed to set unsafe attribute "price" of "WUserItem".
+in D:\xampp\htdocs\zicza\src\protected\web\controllers\WUserItemController.php (146)
+in D:\xampp\htdocs\zicza\src\web\index.php (13)
