@@ -27,7 +27,7 @@ class WUserItemController extends WebController
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','imageupload','upload','view','listitem','detailshop','vote','listcomment'),
+				'actions'=>array('create','imageupload','upload','view','listitem','detailshop','vote','listcomment','createshop','deleteimage'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -35,7 +35,11 @@ class WUserItemController extends WebController
 			),
 		);
 	}
-
+    
+    public function actionCreateshop(){
+        $this->layout = '//layouts/column3';
+        $this->render('createshop',array());
+    }
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -126,30 +130,64 @@ class WUserItemController extends WebController
 	 */
 	public function actionCreate()
 	{
-        $this->layout = '//layouts/column3';
+        $this->layout = '//layouts/column2';
 		$model=new WUserItem;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-        $file_id = isset($_POST['file_id']) ? $_POST['file_id'] : '';
+        //$file_id = isset($_POST['file_id']) ? $_POST['file_id'] : '';
+        $parser = new CHtmlPurifier();
 		if(isset($_POST['WUserItem']))
 		{   
-            $parser = new CHtmlPurifier();
-            $option = array(
-                'address'=> $parser->purify($_POST['WUserItem']['address']),
-                'phonenumber'=> $parser->purify($_POST['WUserItem']['phonenumber']),
-                'skype'=> $parser->purify($_POST['WUserItem']['skype']),
-                'yahoo'=> $parser->purify($_POST['WUserItem']['yahoo']),
-                'price'=> $parser->purify($_POST['WUserItem']['price']),
+            $file_id = isset($_POST['file_id']) ? $parser->purify($_POST['file_id']) : ''; //var_dump($file_id);exit();
+            $delete_file_id = isset($_POST['delete_file_id']) ? $parser->purify($_POST['delete_file_id']) : '';
+            $arrFileID = '';
+            
+            if($delete_file_id == 0 || $delete_file_id == '')
+            {
+                $arrFileID = $file_id;
+            }
+            else
+            {
+                $arrDelete = explode(",",$delete_file_id);
+                $arrFile = explode(",",$file_id);
+                $fileAp = array();
                 
-            );  
+                if(is_array($arrFile))
+                {
+                    foreach($arrFile as $key=>$value)
+                    {
+                        if(!in_array($value,$arrDelete))
+                        {
+                            $fileAp[]= $value;
+                        }
+                    }
+                }
+                
+                $arrFileID = implode(",",$fileAp);
+            }
+            if(isset($_POST['WUserItem']['type']) && $_POST['WUserItem']['type'] == UserItem::TYPE_SHOP){
+                $option = array(
+                    'address'=> $parser->purify($_POST['WUserItem']['address']),
+                    'phonenumber'=> $parser->purify($_POST['WUserItem']['phonenumber']),
+                    'skype'=> $parser->purify($_POST['WUserItem']['skype']),
+                    'yahoo'=> $parser->purify($_POST['WUserItem']['yahoo']),
+                );
+            }elseif(isset($_POST['WUserItem']['type']) && $_POST['WUserItem']['type'] == UserItem::TYPE_PRODUCT){
+                $option = array(
+                    'price'=> $parser->purify($_POST['WUserItem']['price']),
+                    
+                );
+            }
+              
 			$model->attributes=$_POST['WUserItem'];
             $model->title = $parser->purify($_POST['WUserItem']['title']);
             $model->description = $parser->purify($_POST['WUserItem']['description']);
-            $model->image = $file_id;
+            $model->image = $arrFileID;
             $model->created_date = date("Y-m-d H:i:s");
             $model->user_id = '3';
             $model->status = '1';
+            $model->type = $_POST['WUserItem']['type'];
             $model->options = serialize($option);
 			if($model->save()){
 			     Yii::app()->user->setFlash('success','Bạn đã tạo thành công shop mới');
@@ -272,9 +310,10 @@ class WUserItemController extends WebController
     public function actionDetailshop(){
         $this->layout = '//layouts/column2';
         $idshop = isset($_REQUEST['id'])?$_REQUEST['id']:0;
+        $type = isset($_REQUEST['type'])?$_REQUEST['type']:'';
         $arrShop = WUserItem::getDetailShop($idshop);
         
-        $this->render('detailshop', array('model'=> $arrShop));
+        $this->render('detailshop', array('model'=> $arrShop,'type'=>$type));
     }
     
     public function actionVote(){
@@ -285,8 +324,9 @@ class WUserItemController extends WebController
         $this->layout = '//layouts/column2';
         $idshop = isset($_REQUEST['id'])?$_REQUEST['id']:0;
         $vote_type = isset($_REQUEST['vote_type'])?$_REQUEST['vote_type']:'';
-        
+        $type = isset($_REQUEST['type'])?$_REQUEST['type']:'';
         $page = isset($_POST['p'])?$_POST['p']:1;
+        
         $num_per_page = Yii::app()->params->listshop_num_per_page;
         $total = WUserItem::getCountComment($vote_type,$idshop); //echo $total;exit();
         $pageInfo = WFunction::getPagerInfo($total,$page,$num_per_page);//var_dump($pageInfo); exit();
@@ -296,7 +336,7 @@ class WUserItemController extends WebController
         
         $arrShop = WUserItem::getDetailShop($idshop);
         
-        $this->render('listcomment', array('arrComment'=>$arrListComment, 'pageInfo'=>$pageInfo, 'model'=> $arrShop));
+        $this->render('listcomment', array('arrComment'=>$arrListComment, 'pageInfo'=>$pageInfo, 'model'=> $arrShop, 'type'=>$type, 'vote_type'=>$vote_type));
     }
 	/**
 	 * Deletes a particular model.
@@ -317,6 +357,66 @@ class WUserItemController extends WebController
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
+    
+    public function actionDeleteImage()
+    {
+        $id = isset($_POST['id']) ? $_POST['id'] : 0;
+        $file_name = isset($_POST['file_name']) ? $_POST['file_name'] : '';
+        $ext = isset($_POST['ext']) ? $_POST['ext'] : '';
+        //$resource_id = isset($_POST['resource_id']) ? $_POST['resource_id'] : 0;
+        
+        $model = WImages ::model()->find(
+            "id = :id",
+            array(
+                ':id' => $id,
+            )
+        );
+        
+        if($resource_id != 0){
+            $resourceModel = WCampaignResource::model()->findByPk($resource_id);
+            $arrFileID = explode(',',$resourceModel->ad_file_id);
+            $arrNewFile = array();
+            if(is_array($arrFileID)){
+                foreach( $arrFileID as $key => $value ){
+                    if($value != $id ){
+                        $arrNewFile[] = $value;
+                    }
+                }
+            }
+            $resourceModel->ad_file_id = implode(",",$arrNewFile);
+            $resourceModel->save();
+        }
+        
+        $files = realpath(Yii::app()->getBasePath().'/../uploads/')."/".$file_name;
+        if($model)
+        {
+            if($model->delete() && @unlink($files.'.'.$ext) )
+            {
+                $arrReturn = array(
+                    "status"=>true,
+                    "msg"=>Yii::t('web/campaign','delete_image_ok'),
+                );
+            }
+            else
+            {
+                $arrReturn = array(
+                    "status"=>false,
+                    "msg"=>Yii::t('web/campaign','delete_image_fail'),
+                );
+            }
+            
+        }
+        else
+        {
+            $arrReturn = array(
+                    "status"=>false,
+                    "msg"=>Yii::t('web/campaign','delete_image_fail'),
+                );
+        }
+        
+        echo json_encode($arrReturn);
+        exit();
+    }
     
 
 	/**

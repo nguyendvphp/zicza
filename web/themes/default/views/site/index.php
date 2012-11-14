@@ -1,1 +1,4 @@
-<h1>Zicza - Lời khuyên tốt nhất dành cho bạn.</h1>
+<div class="ads">
+    <img src="<?php echo Yii::app()->theme->baseUrl;?>/images/ads.png" />
+    <img src="<?php echo Yii::app()->theme->baseUrl;?>/images/ads_world.png" />
+</div>

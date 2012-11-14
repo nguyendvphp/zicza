@@ -1,6 +1,6 @@
 body
 {
-    background: none repeat scroll 0 0 #FFFFFF;
+    background:url(../images/background.jpg) repeat;
     color: #333333;
     direction: ltr;
     font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
@@ -72,7 +72,7 @@ a:hover{
 }
 #login{
     float:left;
-    width:200px;
+    width:680px;
     padding-top: 10px;
 }
 #mainmenu{
@@ -105,20 +105,42 @@ a:hover{
 }
 #sidebar{
     float:left;
-    width:179px;
-    border-right: 1px solid #ccc;
+    width:380px;
     overflow: hidden;
     min-height: 300px;
     padding-top: 10px;
 }
+#sidebarsub{
+    float:left;
+    width:280px;
+}
 #sidebar .info{
     padding-left: 5px;
 }
+#sidebar div{
+    vertical-align: middle;
+    padding-top: 150px;
+}
+#sidebar div .slogan{
+    text-transform: uppercase;
+    font-style: italic;
+}
+#sidebarsub div{
+    vertical-align: middle;
+    padding-top: 116px;
+    padding-left: 20px;
+}
+#sidebarsub div .slogan{
+    text-transform: uppercase;
+    font-style: italic;
+}
 #maincontent{
     float:left;
-    width:770px;
-    padding-left: 20px;
+    width:600px;
     padding-top: 10px;
+}
+#maincontent .ads img{
+    float:left;
 }
 #maincontent h1{
     font-size: 18px;
@@ -189,6 +211,16 @@ a:hover{
 }
 
 /* css for company */
+#sidebar_sub{
+    float:left;
+    width:180px;
+    padding: 10px;
+}
+#maincontent_sub{
+    float:left;
+    width:760px;
+    padding: 10px;
+}
 #slogan{
     float: left;
     padding-left: 20px;
@@ -249,4 +281,104 @@ a:hover{
 #maincontent .comment .info_comment{
     width:500px;
     float:left;
+}
+.box_shop{
+    padding-top: 30px;
+}
+.box-shop{
+    width:160px;
+    margin-top: 20px;
+    background: #d6ffad;
+    box-shadow: 3px 3px 3px #ccc;
+}
+.box-shop a{
+    color: #000;
+    font-weight: bold;
+    padding: 10px 10px 10px 33px;
+    display:block;
+    font-size: 16px;
+}
+.box-shop a:hover{
+    text-decoration: none;
+}
+.content_product{
+    float:left;
+    width:57%;
+    padding: 10px;
+    
+}
+.count_like{
+    float:left;
+    width:38%;
+    padding: 10px;
+}
+.count_like .khuyenmua{
+    margin-top:83px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-shadow: 5px 5px 5px #ccc;
+    line-height: 25px;
+    padding-bottom: 10px;
+    padding-left: 90px;
+    padding-top: 5px;
+}
+.count_like .khongnenmua{
+    margin-top:40px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-shadow: 5px 5px 5px #ccc;
+    line-height: 25px;
+    padding-bottom: 10px;
+    padding-left: 90px;
+    padding-top: 5px;
+}
+.countview{
+    width:100%;
+}
+.desc{
+    width:100%;
+    float:left;
+}
+.countview span{
+    font-size: 14px;
+    color: red;
+    float: right;
+    border: 1px solid #CCCCCC;
+    border-radius: 7px 7px 7px 7px;
+    padding: 5px;
+}
+#image_slider .carousel-control {
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 999px;
+    overflow: hidden;
+    text-indent: -9999px;
+    vertical-align: middle;
+    width: 40px;
+}
+#image_slider .carousel-previous {
+    background: url("../images/prev.png") no-repeat scroll 0 0 transparent;
+}
+#image_slider .carousel-next{
+     background: url("../images/next1.png") no-repeat scroll 0 0 transparent;
+}
+#comment_sub{
+    padding: 20px;
+    width: 100%;
+    float:left;
+}
+#comment_sub .comment{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#comment_sub .comment .avatar{
+    float:left;
+    width:200px;
+}
+#comment_sub .comment .info_comment{
+    float:left;
+    width:750px;
 }

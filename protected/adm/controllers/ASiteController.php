@@ -76,7 +76,6 @@ class ASiteController extends AController
 	 */
 	public function actionLogin()
 	{
-		ini_set('display_errors', 1);
 	   $year = date("Y");
         $month =date("m");
         

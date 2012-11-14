@@ -12,6 +12,7 @@
  * @property string $status
  * @property string $created_date
  * @property string $latest_update
+ * @property string $type
  */
 class WUserItem extends UserItem
 {
@@ -20,6 +21,7 @@ class WUserItem extends UserItem
     public $skype;
     public $yahoo;
     public $url;
+    public $code_product;
     public $price;
 	/**
 	 * Returns the static model of the specified AR class.
@@ -74,7 +76,8 @@ class WUserItem extends UserItem
 	 */
 	public function attributeLabels()
 	{
-		return array(
+	   if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'shop'){
+	       return array(
 			'id' => 'ID',
 			'user_id' => 'User',
 			'title' => 'Tên shop',
@@ -88,6 +91,24 @@ class WUserItem extends UserItem
             'url'=>'Link liên kết',
             'price'=>'Giá sản phẩm',
 		);
+	   }elseif(isset($_REQUEST['type']) && $_REQUEST['type'] == 'product'){
+	       return array(
+			'id' => 'ID',
+			'user_id' => 'User',
+			'title' => 'Tên sản phẩm',
+			'description' => 'Mô tả sản phẩm',
+			'image' => 'Ảnh sản phẩm',
+			'status' => 'Trạng thái',
+			'created_date' => 'Ngày tạo',
+			'latest_update' => 'Ngày cập nhật',
+            'address'=>'Địa chỉ',
+            'phonenumber'=>'Số điện thoại',
+            'url'=>'Link liên kết',
+            'price'=>'Giá sản phẩm',
+            'code_product'=>'Mã sản phẩm',
+		);
+	   }
+		
 	}
 
 	/**

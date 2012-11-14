@@ -1,32 +1,25 @@
 <div style="width: 100%; padding-bottom: 10px;">
-    <?php 
-  	     if($model['image']){
-  	         $arrimage = Images::model()->find('id=:id',array(':id'=>$model['image']));
-    ?>
-        <img style="float: left;" width="" height="120px" src="<?php echo Yii::app()->params['upload_path'].$arrimage['image_path'].$arrimage['image_title']. '.' . $arrimage['image_ext'];?>" />
-        <?php 
-	}else {
-		echo CHtml::image(Yii::app()->theme->baseUrl.'/images/noimage.gif');
-	}?>
-    <div style="float: left;"><span class="namecompany"><?php echo $model['title'];?></span></div>
+    <div style="float: left;">
+        <span class="namecompany">
+            <?php
+                if(isset($type) && $type == UserItem::TYPE_PRODUCT): 
+                    echo 'Danh sách bình luận về sản phẩm: <b>'.$model['title'].'</b>';
+                elseif(isset($type) && $type == UserItem::TYPE_SHOP) :
+                    echo 'Danh sách bình luận về cửa hàng: <b>'.$model['title'].'</b>';
+                endif;    
+            ?>
+        </span>
+    </div>
     <div class="clear"></div>
 </div>
-<div id="sidebar">
-    <h3>Giới thiệu về Shop</h3>
-    <div class="info">
-        <?php if(isset($model['options'])):
-            $arrOption = unserialize($model['options']);
-            
-        ?>
-        <i>Địa chỉ</i>: <b><?php echo $arrOption['address'];?></b><br />
-        <i>Điện thoại</i> : <b><?php echo $arrOption['phonenumber'];?></b><br />
-        <i>Skype</i> : <b><?php echo $arrOption['skype'];?></b><br />
-        <i>Yahoo</i> : <b><?php echo $arrOption['yahoo'];?></b>
-        <?php endif;?>
-    </div>
-</div>
-<div id="maincontent">
-    <h3>Danh sách những lý do khuyên <span class="like">Nên Mua</span></h3>
+<div id="comment_sub">
+    <?php
+        if(isset($vote_type) && $vote_type == ItemVote::COMPLIMENT_VOTE):
+    ?>
+    <h3>Danh sách những lý do khen <span class="like">Nên Mua</span></h3>
+    <?php elseif(isset($vote_type) && $vote_type == ItemVote::DECRY_VOTE) :?>
+    <h3>Danh sách những lý do chê <span class="like">Không Nên Mua</span></h3>
+    <?php endif;?>
     <?php
         if(is_array($arrComment) && count($arrComment) > 0){
             foreach($arrComment as $key=>$comment){
@@ -47,5 +40,10 @@
             echo 'Không có bình luận nào';
         }
     ?>
+    <div class="jb_pagination">
+        <?php echo $pageInfo['strPager'];?>
+    </div>
+    <script src="http://connect.facebook.net/vi_VN/all.js#appId=287239248051826&amp;xfbml=1"></script>
+    <fb:comments xid="287239248051826" width="920px" num_posts="10"></fb:comments>
 </div>
 <div class="clear"></div>

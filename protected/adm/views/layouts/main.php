@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/mystyle.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery.alerts.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.css" />
@@ -28,7 +28,7 @@
 	<div class="mymenu">
 		<?php $this->widget('bootstrap.widgets.BootNavbar', array(
 		    'fixed'=>false,
-		    'brand'=>'Album Photo',
+		    'brand'=>'Zicza',
 		    'brandUrl'=>'#',
 		    'collapse'=>true, // requires bootstrap-responsive.css
 		    'items'=>array(
@@ -66,10 +66,9 @@
                             //array('label'=>Yii::t('adm/cp','mnu_banner'), 'url'=>array('/aContentProvider/admin'),'visible'=>AUserPermission::checkUserPermission('aContentProvider','del')),                   
                           ), 
                         ),
-                        array('label'=>Yii::t('adm/gallery','mnu_photo'), 
+                        array('label'=>Yii::t('adm/useritem','Quản lý Shop'), 
                           'items'=>array( 
-                            array('label'=>Yii::t('adm/gallery','mnu_cate_gallery'), 'url'=> array('/aCategoryGallery/admin'),'visible'=>AUserPermission::checkUserPermission('aCategoryGallery','del')),
-                            array('label'=>Yii::t('adm/gallery','mnu_gallery'), 'url'=>array('/aGallery/admin'),'visible'=>AUserPermission::checkUserPermission('aGallery','del')),
+                            array('label'=>Yii::t('adm/gallery','Danh sách Shop'), 'url'=> array('/aUserItem/admin'),'visible'=>AUserPermission::checkUserPermission('aUserItem','del')),
                             //array('label'=>Yii::t('adm/cp','mnu_banner'), 'url'=>array('/aContentProvider/admin'),'visible'=>AUserPermission::checkUserPermission('aContentProvider','del')),                   
                           ), 
                         ),

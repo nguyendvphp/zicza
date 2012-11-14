@@ -38,8 +38,8 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			'returnUrl' => 'aDefault/login',
-			'loginUrl' => 'aDefault/login'
+			'returnUrl' => 'aSite/login',
+			'loginUrl' => 'aSite/login'
 		),
         'bootstrap'=>array(
 		        'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
@@ -60,10 +60,7 @@ return array(
 		'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
-		'errorHandler'=>array(
-			// use 'site/error' action to display errors
-            'errorAction'=>'mdefault/error',
-        ),
+		
 		'log'=>array(
            'class'=>'CLogRouter',
 
@@ -81,6 +78,7 @@ return array(
 			),
 
           ),
+          
           
 	),
 

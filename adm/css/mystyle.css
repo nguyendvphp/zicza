@@ -1,5 +1,5 @@
 #page {
-	background: none repeat scroll 0 0 white;
+	background: #FFF;
     border: none;
     margin-bottom: 5px;
     margin-top: 0px;
@@ -16,8 +16,9 @@
 }
 #pagelogin{
     margin:0 auto;
-    padding-top: 50px;
+    margin-top: 50px;
     width:300px;
+    background: #fff;
 }
 .mymenu{
 	position: fixed;

@@ -13,10 +13,17 @@ $(function () {
             $("#list_image").html("");
             $(".delete_image").html("");
             $("#list_image").html("<img class='image_upload' src='<?php echo Yii::app()->params->upload_path; ?>"+filepath+filename+"_110."+fileext+"' />")
-            /*$(".delete_image").html("<img onclick='delete_image("+image_id+");' class='delete_image_button' src='<?php echo Yii::app()->baseUrl; ?>/images/delete.png' />")*/
+            $(".delete_image").html("<img onclick='delete_image("+image_id+");' class='delete_image_button' src='<?php echo Yii::app()->theme->baseUrl; ?>/images/delete.png' />")
             /*$("#adv_file").val(filepath+filename+'.'+fileext)
             $("#adv_file_type").val(fileext)*/
-            $("#file_id").val(image_id);
+            var file_id = $("#file_id").val();
+            if(file_id == ''){
+                file_id = image_id;
+            }else{
+                file_id = file_id+","+image_id;
+            }
+            $("#file_id").val("");   
+            $("#file_id").val(file_id);
         }
     });
 });
@@ -37,6 +44,7 @@ $(function () {
             $("#adv_file_type").val(fileext)*/
             //$("#file_id").val(image_id);
         }
+        
     });
 });
 </script>
@@ -48,15 +56,17 @@ $(function () {
     'htmlOptions'=>array('enctype'=>'multipart/form-data')
 )); ?>
 
-	<p class="note">Câc trường <span class="required">*</span> là bắt buộc.</p>
+	<p class="note" style="padding-left: 20px;">Các trường <span class="required">*</span> là bắt buộc.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
+<div style="float: left; width:40%; padding-left:20px;">
 	<div class="row">
 		<?php echo $form->labelEx($model,'title'); ?>
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255,'style'=>'width:300px;','rel'=>'tooltip','title'=>'Hãy điền tên shop.Khoảng nhỏ hơn 80 kí tự.')); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
+    <?php if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'shop'):?>
+    <input type="hidden" value="<?php echo UserItem::TYPE_SHOP;?>" name="WUserItem[type]" />
     <div class="row">
 		<?php echo $form->labelEx($model,'address'); ?>
 		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>255,'style'=>'width:300px;','rel'=>'tooltip','title'=>'Hãy điền địa chỉ của cửa hàng.')); ?>
@@ -78,29 +88,6 @@ $(function () {
 		<?php echo $form->error($model,'yahoo'); ?>
 	</div>
     <div class="row">
-		<?php echo $form->labelEx($model,'price'); ?>
-		<?php echo $form->textField($model,'price',array('size'=>60,'maxlength'=>255,'style'=>'width:300px;','rel'=>'tooltip','title'=>'Hãy điền giá sản phẩm.Bạn chỉ điền khi đây là sản phẩm')); ?>
-		<?php echo $form->error($model,'price'); ?>
-	</div>
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php //echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
-        <?php 
-            $this->widget('ext.widgets.redactorjs.Redactor', array( 
-                            'editorOptions' => array(
-                                'autoresize' => true, 
-                                'fixed' => false,
-                                'imageUpload' => Yii::app()->createUrl('wUserItem/imageupload'),
-                                ), 
-                            'model' => $model, 
-                            'attribute' => 'description',
-                             
-                        ));
-            ?>
-		<?php echo $form->error($model,'description'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php //echo $form->textArea($model,'image',array('rows'=>6, 'cols'=>50)); ?>
         <div class="cp_upload_logo" >
@@ -110,10 +97,10 @@ $(function () {
                     <img class="upload_image_left" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/upload_image.png" />
                     <div class="upload_image_text"><?php //echo Yii::t('adm/news','thumbnail'); ?></div>
                 </span>
-                <input id="fileupload" accept="*/" type="file" name="files" data-url="<?php echo Yii::app()->baseUrl; ?>/index.php?r=wUserItem/upload" multiple />
+                <input id="fileupload" accept="*/" type="file" name="files" data-url="<?php echo Yii::app()->baseUrl; ?>/index.php?r=wUserItem/upload" />
         </span>
         <input type="hidden" name="file_id" id="file_id" value="" />
-        
+        <input type="hidden" name="delete_file_id" id="delete_file_id" value="" />
         <br />
         <div class="clear"></div>
         <br />
@@ -133,12 +120,75 @@ $(function () {
         </div>
 		<?php echo $form->error($model,'image'); ?>
 	</div>
-
-
-	<div class="row buttons">
-		<?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'ok white', 'label'=>$model->isNewRecord ? Yii::t('adm/staticpage','Tạo mới'):Yii::t('adm/staticpage','Lưu lại'))); ?>
-        <?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'reset', 'icon'=>'remove', 'label'=>Yii::t('adm/staticpage','reset'))); ?>
+    <?php else:?>
+    <input type="hidden" value="<?php echo UserItem::TYPE_PRODUCT;?>" name="WUserItem[type]" />
+    <div class="row">
+		<?php echo $form->labelEx($model,'price'); ?>
+		<?php echo $form->textField($model,'price',array('size'=>60,'maxlength'=>255,'style'=>'width:300px;','rel'=>'tooltip','title'=>'Hãy điền giá sản phẩm.Bạn chỉ điền khi đây là sản phẩm')); ?>
+		<?php echo $form->error($model,'price'); ?>
 	</div>
+    <div class="row">
+		<?php echo $form->labelEx($model,'image'); ?>
+		<?php //echo $form->textArea($model,'image',array('rows'=>6, 'cols'=>50)); ?>
+        <div class="cp_upload_logo" >
+        <span class="btn btn-success fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span>
+                    <img class="upload_image_left" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/upload_image.png" />
+                    <div class="upload_image_text"><?php //echo Yii::t('adm/news','thumbnail'); ?></div>
+                </span>
+                <input id="fileupload" accept="*/" type="file" name="files" data-url="<?php echo Yii::app()->baseUrl; ?>/index.php?r=wUserItem/upload" multiple />
+        </span>
+        <input type="hidden" name="file_id" id="file_id" value="" />
+        <input type="hidden" name="delete_file_id" id="delete_file_id" value="" />
+        <br />
+        <div class="clear"></div>
+        <br />
+        
+        <div id="list_image">
+            <?php 
+                /*if($model->adv_file != ''){
+                    $path = explode(".",$model->adv_file);
+                    $path = $path[0]."_110".".".$path[1];
+                    echo "<img class='image_upload' src='".Yii::app()->params->upload_path.$path."' />";
+                }*/
+             ?>
+            
+        </div>
+        <div class="delete_image"></div>
+        <div class="clear"></div>
+        </div>
+		<?php echo $form->error($model,'image'); ?>
+	</div>
+    <?php endif;?>
+    
+ </div>   
+ <div style="float: left; width:56%;">
+	<div class="row">
+		<?php echo $form->labelEx($model,'description'); ?>
+		<?php //echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
+        <?php 
+            $this->widget('ext.widgets.redactorjs.Redactor', array( 
+                            'editorOptions' => array(
+                                'autoresize' => true, 
+                                'fixed' => false,
+                                'imageUpload' => Yii::app()->createUrl('wUserItem/imageupload'),
+                                ), 
+                            'model' => $model, 
+                            'attribute' => 'description',
+                             
+                        ));
+            ?>
+		<?php echo $form->error($model,'description'); ?>
+	</div>
+</div>
+<div class="clear"></div>	
+
+
+<div class="row buttons" style="padding-left: 20px;">
+	<?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'ok white', 'label'=>$model->isNewRecord ? Yii::t('adm/staticpage','Tạo mới'):Yii::t('adm/staticpage','Lưu lại'))); ?>
+    <?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'reset', 'icon'=>'remove', 'label'=>Yii::t('adm/staticpage','reset'))); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
@@ -150,4 +200,35 @@ $(function () {
     $('#WUserItem_skype').tooltip();
     $('#WUserItem_yahoo').tooltip();
     $('#WUserItem_price').tooltip();
+    
+    function delete_image(id,file_name,ext){
+         var csrf = $("#csrf").val();
+        loadUrl = WEB_HOST_PATH+"/index.php?r=WUserItem/deleteimage";
+        
+        var data = {'id':id,'file_name':file_name,'ext':ext,'YII_CSRF_TOKEN':csrf};
+        $.ajax({
+                url: loadUrl,
+                dataType: 'json',
+                type: 'POST',
+                data : data,
+                success:function(json){
+                    $.alerts.dialogClass = $(this).attr('id'); // set custom style class
+                    jAlert(json.msg, WARNING, function () {
+                        $.alerts.dialogClass = null; // reset to default
+                    });
+                    if(json.status == true){
+                        $("#shot"+id).html("");
+                        var delete_file_id = $("#delete_file_id").val();
+                        if(delete_file_id == ''){
+                            delete_file_id = id;
+                        }else{
+                            delete_file_id = delete_file_id+","+id;
+                        }
+                        $("#delete_file_id").val("");
+                        $("#delete_file_id").val(delete_file_id);
+                    }else{
+                    }
+    			}
+            });
+    }
 </script>

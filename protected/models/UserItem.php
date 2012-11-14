@@ -13,9 +13,12 @@
  * @property string $created_date
  * @property string $latest_update
  * @property string $options
+ * @property string $type
  */
 class UserItem extends CActiveRecord
 {
+    const TYPE_SHOP = 'shop';
+    const TYPE_PRODUCT = 'product';
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.

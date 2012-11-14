@@ -1,2 +1,2 @@
 <br />
-<h3>Album Photo Admin Panel</h3>
+<h3>Zicza Admin Panel</h3>

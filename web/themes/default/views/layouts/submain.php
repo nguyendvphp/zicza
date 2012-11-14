@@ -24,30 +24,12 @@
             <div id="logo">
                 <a href=""><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/logo.png" alt="logo zicza" /></a>
             </div>
-            <div id="mainmenu">
-                <?php $this->widget('zii.widgets.CMenu',array(
-        			'items'=>array(
-        				//array('label'=>'Home', 'url'=>array('/site/index')),
-        				array('label'=>Yii::t('web/home','homepage'), 'url'=>array('Site/index')),
-                        array('label'=>Yii::t('web/home','Giới thiệu'), 'url'=>array('/site/page', 'view'=>'about')),
-                        array('label'=>Yii::t('web/home','contact'), 'url'=>array('/site/contact')),
-        			 ),
-   		      )); ?>
-            </div>
-            <div id="login">
-                <?php if(!isset(Yii::app()->session['email_fb'])): ?>
-                    <a href="<?php echo Yii::app()->createUrl('wUserItem/create');?>"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/createshop.png" /></a>
-                <?php else :?>
-                    <a href=""><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/fb-login.png" /></a>
-                <?php endif;?>
-                
-            </div>
-            <div class="clear"></div>
         </div>
         <div id="primary">
-            <div id="sidebar">
-                Dành cho quảng cáo<br />
-                <img src="<?php echo Yii::app()->theme->baseUrl;?>/images/adv3.gif" />
+            <div id="sidebarsub">
+                <div>
+                    <span class="slogan">Bạn muốn quảng bá:</span>
+                </div>
             </div>
             <div id="maincontent">
                 <?php echo $content;?>

@@ -17,20 +17,21 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/jquery-ui.css" />
     <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/global.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    <script type="text/javascript">
+        $(function(){
+            $("div#image_slider").carousel();
+        });
+
+    </script>
     
 </head>
 
 <body>
     <div id="wrapper">
-        <div id="headersub">
-            <div id="slogan">
-                <p>Cái loa mua sắm Zicza.com</p>
-                <p>Cho biết cửa hàng nào <span class="like">Nên Mua</span> hay <span class="dislike">Không Nên Mua</span> trên Internet.</p>
+        <div id="header">
+            <div id="logo">
+                <a href=""><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/logo.png" alt="logo zicza" /></a>
             </div>
-            <div id="company">
-                <a href="<?php echo Yii::app()->createUrl('Site/index');?>"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/company.png" border="0" /></a>
-            </div>
-            <div class="clear"></div>
         </div>
         <div id="primary">
             <?php echo $content;?>
